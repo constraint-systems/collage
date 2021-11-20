@@ -237,24 +237,32 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
     const downHandler = (e: KeyboardEvent) => {
       let press = e.key.toLowerCase();
       if (press === "-") {
-        discreteZoom(32);
+        discreteZoom(32 * 2);
       } else if (press === "+" || press === "=") {
-        discreteZoom(-32);
+        discreteZoom(-32 * 2);
       }
       if (!pressed.includes(press)) {
         pressed.push(press);
       }
       if (pressed.includes("arrowleft") || pressed.includes("h")) {
-        discretePanCamera([1, 0]);
+        discretePanCamera([1 * 2, 0]);
       }
       if (pressed.includes("arrowright") || pressed.includes("l")) {
-        discretePanCamera([-1, 0]);
+        discretePanCamera([-1 * 2, 0]);
       }
       if (pressed.includes("arrowup") || pressed.includes("k")) {
-        discretePanCamera([0, 1]);
+        if (e.shiftKey) {
+          discreteZoom(32 * 2);
+        } else {
+          discretePanCamera([0, 1 * 2]);
+        }
       }
       if (pressed.includes("arrowdown") || pressed.includes("j")) {
-        discretePanCamera([0, -1]);
+        if (e.shiftKey) {
+          discreteZoom(-32 * 2);
+        } else {
+          discretePanCamera([0, -1 * 2]);
+        }
       }
     };
 

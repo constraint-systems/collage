@@ -25,7 +25,23 @@ const Blog: React.FC = () => {
       <Head>
         <title>Collage</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" />
+        <link rel="icon" href="/icon.png" />
+        <meta name="theme-color" content="#000000" />
+        <meta
+          name="description"
+          content="An experimental public collage that combines images according to their complexity."
+        />
+        <meta property="og:title" content="Collage" />
+        <meta
+          property="og:description"
+          content="An experimental public collage that combines images according to their complexity."
+        />
+        <meta
+          property="og:image"
+          content="https://collage.constraint.systems/collage.jpg"
+        />
+        <meta property="og:url" content="https://collage.constraint.systems" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       {collage ? (
         <Assembler collage={collage} showLoading={showLoading} />
