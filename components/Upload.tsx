@@ -152,10 +152,31 @@ export default function UploadTest({
               json.src = URL.createObjectURL(blob);
               setCollage(json);
               setShowLoading(false);
+
+              const faviconCanvas = document.createElement("canvas");
+              faviconCanvas.width = 32;
+              faviconCanvas.height = 32;
+              const faviconCx = faviconCanvas.getContext("2d");
+              faviconCx.drawImage(
+                baseCanvas,
+                0,
+                0,
+                baseCanvas.width,
+                baseCanvas.height,
+                0,
+                0,
+                32,
+                32
+              );
+              faviconCanvas.toBlob(async (blob) => {
+                const link = document.querySelector("link[rel*='icon']");
+                link.setAttribute("href", URL.createObjectURL(blob));
+              });
             });
         });
       };
       const oriented = await getBase64Strings([file], { maxSize: 2048 });
+
       img.src = oriented[0];
     };
     baseImg.src = mostRecentCollage.src;

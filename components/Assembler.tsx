@@ -125,6 +125,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
     backcx.lineWidth = 8;
     backcx.strokeStyle = "#222222";
     backcx.strokeRect(4, 4, 2048 - 4, 2048 - 4);
+
     const backTexture = new THREE.CanvasTexture(backCanvas);
     backTexture.magFilter = THREE.NearestFilter;
 
@@ -181,6 +182,27 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
         cols * cellSize,
         rows * cellSize
       );
+
+      const faviconCanvas = document.createElement("canvas");
+      faviconCanvas.width = 32;
+      faviconCanvas.height = 32;
+      const faviconCx = faviconCanvas.getContext("2d");
+      faviconCx.drawImage(
+        bcx.canvas,
+        0,
+        0,
+        bcx.canvas.width,
+        bcx.canvas.height,
+        0,
+        0,
+        32,
+        32
+      );
+      faviconCanvas.toBlob(async (blob) => {
+        const link = document.querySelector("link[rel*='icon']");
+        link.setAttribute("href", URL.createObjectURL(blob));
+      });
+
       texture.needsUpdate = true;
     };
     img.src = collage.src;

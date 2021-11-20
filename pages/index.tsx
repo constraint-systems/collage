@@ -34,6 +34,7 @@ const Blog: React.FC = (props: any) => {
       <Head>
         <title>Collage</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon" />
       </Head>
       <Assembler collage={collage} showLoading={showLoading} />
       <Upload
