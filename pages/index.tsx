@@ -1,33 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
-import { GetStaticProps } from "next";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Upload from "../components/Upload";
-import prisma from "../lib/prisma";
 import Assembler from "../components/Assembler";
 import Head from "next/head";
 
-export const getStaticProps: GetStaticProps = async () => {
-  const collage = await prisma.collage.findFirst({
-    orderBy: {
-      createdAt: "desc",
-    },
-    select: {
-      id: true,
-      src: true,
-      values: true,
-    },
-  });
-  return {
-    props: {
-      collage,
-    },
-  };
-};
-
-const Blog: React.FC = (props: any) => {
-  const [collage, setCollage] = React.useState(props.collage);
+const Blog: React.FC = () => {
+  const [collage, setCollage] = React.useState(null);
   const [showMore, setShowMore] = React.useState(false);
   const [showLoading, setShowLoading] = useState(false);
+
+  useEffect(() => {
+    fetch("api/collage/mostRecent", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setCollage(res));
+  }, []);
 
   return (
     <Layout>
@@ -36,13 +27,16 @@ const Blog: React.FC = (props: any) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" />
       </Head>
-      <Assembler collage={collage} showLoading={showLoading} />
-      <Upload
-        collage={collage}
-        setCollage={setCollage}
-        showLoading={showLoading}
-        setShowLoading={setShowLoading}
-      />
+      {collage ? (
+        <Assembler collage={collage} showLoading={showLoading} />
+      ) : null}
+      {collage ? (
+        <Upload
+          setCollage={setCollage}
+          showLoading={showLoading}
+          setShowLoading={setShowLoading}
+        />
+      ) : null}
       <div
         style={{
           position: "fixed",
