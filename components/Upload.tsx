@@ -264,7 +264,7 @@ export default function UploadTest({
           </div>
         </div>
       </div>
-      <FileInput onChange={handleFileChange} />
+      <FileInput onChange={handleFileChange} accept=".jpg,.png,.jpeg" />
       <div
         role="button"
         title="Add an image"
