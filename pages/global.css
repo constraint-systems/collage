@@ -1,0 +1,37 @@
+html {
+  box-sizing: border-box;
+  background: #000000;
+  touch-action: none;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "custom", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  background: rgba(0, 0, 0, 0.05);
+  user-select: none;
+}
+
+input,
+textarea {
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a,
+span[role="button"] {
+  color: inherit;
+  pointer-events: auto;
+}
