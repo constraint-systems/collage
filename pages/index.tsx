@@ -3,6 +3,8 @@ import Layout from "../components/Layout";
 import Upload from "../components/Upload";
 import Assembler from "../components/Assembler";
 import Head from "next/head";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Blog: React.FC = () => {
   const [collage, setCollage] = React.useState(null);
@@ -45,7 +47,18 @@ const Blog: React.FC = () => {
       </Head>
       {collage ? (
         <Assembler collage={collage} showLoading={showLoading} />
-      ) : null}
+      ) : (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Loader type="TailSpin" color="#ccc" height={60} width={60} />
+        </div>
+      )}
       {collage ? (
         <Upload
           setCollage={setCollage}

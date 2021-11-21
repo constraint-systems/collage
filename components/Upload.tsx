@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useS3Upload } from "next-s3-upload";
 import S3 from "aws-sdk/clients/s3";
 import { getBase64Strings } from "exif-rotate-js/lib";
+import Loader from "react-loader-spinner";
 
 export default function UploadTest({
   setCollage,
@@ -220,6 +221,18 @@ export default function UploadTest({
 
   return (
     <div style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: showLoading ? "block" : "none",
+        }}
+      >
+        <Loader type="TailSpin" color="#ccc" height={60} width={60} />
+      </div>
+
       <canvas
         style={{
           maxWidth: "calc(100% - 32px)",

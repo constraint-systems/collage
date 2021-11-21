@@ -20,6 +20,7 @@
     "next-s3-upload": "^0.1.7",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "react-loader-spinner": "^4.0.0",
     "react-markdown": "5.0.2",
     "three": "^0.134.0"
   },
