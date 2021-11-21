@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ImageProps } from "./Image";
 import * as THREE from "three";
 import { UseWheelZoom, UsePointerPan } from "../utils/PointerUtils";
+import Loader from "react-loader-spinner";
 
 // from https://stackoverflow.com/a/45873660
 // ctx is the 2d context of the canvas to be trimmed
@@ -93,6 +94,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
   const textureRef = useRef<THREE.Texture>(null);
   const pressedRef = useRef([]);
   const downloadCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [showImageLoader, setShowImageLoader] = useState(false);
 
   // set up three scene
   useEffect(() => {
@@ -160,6 +162,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
 
   useEffect(() => {
     const baseCanvas = baseCanvasRef.current;
+    setShowImageLoader(true);
 
     const baseValues = Array(4096).fill(0);
     const cellSize = 32;
@@ -172,6 +175,8 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
     const img = new Image();
     img.crossOrigin = "";
     img.onload = () => {
+      setShowImageLoader(false);
+
       const cols = Math.round(img.naturalWidth / cellSize);
       const rows = Math.round(img.naturalHeight / cellSize);
 
@@ -353,6 +358,17 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
         }}
       >
         <div>↓</div>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: showImageLoader ? "block" : "none",
+        }}
+      >
+        <Loader type="TailSpin" color="#ccc" height={60} width={60} />
       </div>
     </>
   );
