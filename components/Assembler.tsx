@@ -206,6 +206,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
       faviconCanvas.toBlob(async (blob) => {
         const link = document.querySelector("link[rel*='icon']");
         link.setAttribute("href", URL.createObjectURL(blob));
+        setShowImageLoader(false);
       });
 
       texture.needsUpdate = true;

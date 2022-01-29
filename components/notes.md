@@ -40,3 +40,51 @@ Access to image at 'https://collagesmjp.s3.amazonaws.com/collage-1643085786.png'
 
 AWS S3 Access to image ' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 
+Image can now be retrieved in browser - granted public-read access
+
+
+### bucket policy
+This was NOT part of the next-s3-upload demo setup
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::collagesmjp/*"
+        }
+    ]
+}
+```
+
+### CORS setup
+
+I needed to add `"GET"` to the `AllowedMethod` list, below
+Otherwise, as shows in the next-s3-upload setup example
+
+```json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [
+            "ETag"
+        ]
+    }
+]
+```

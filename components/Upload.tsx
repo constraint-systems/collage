@@ -126,7 +126,7 @@ export default function UploadTest({
 
         baseCanvas.toBlob(async (blob) => {
           let params = {
-            ACL: "public-read",
+            // ACL: "public-read",
             Bucket: data.bucket,
             Key: data.key,
             Body: blob,
