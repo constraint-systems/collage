@@ -12,5 +12,6 @@ export default async function handle(req, res) {
       values: true,
     },
   });
+  console.log(res);
   return res.json(result);
 }

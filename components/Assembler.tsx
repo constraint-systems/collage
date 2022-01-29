@@ -175,7 +175,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
     const img = new Image();
     img.crossOrigin = "";
     img.onload = () => {
-      setShowImageLoader(false);
+      setShowImageLoader(true);
 
       const cols = Math.round(img.naturalWidth / cellSize);
       const rows = Math.round(img.naturalHeight / cellSize);
@@ -211,6 +211,7 @@ const Assembler: React.FC<{ collage: any; showLoading: boolean }> = ({
       texture.needsUpdate = true;
     };
     img.src = collage.src;
+    setShowImageLoader(false);
   }, [collage]);
 
   UseWheelZoom(rendererRef, threeRef);

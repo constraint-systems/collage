@@ -5,6 +5,8 @@ import Assembler from "../components/Assembler";
 import Head from "next/head";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import dummy from "../components/starter.json"
+
 
 const Blog: React.FC = () => {
   const [collage, setCollage] = React.useState(null);
@@ -12,6 +14,7 @@ const Blog: React.FC = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    // setCollage(dummy);
     fetch("api/collage/mostRecent", {
       method: "GET",
       headers: {

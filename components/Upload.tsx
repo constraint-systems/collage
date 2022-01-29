@@ -4,6 +4,8 @@ import S3 from "aws-sdk/clients/s3";
 import { getBase64Strings } from "exif-rotate-js/lib";
 import Loader from "react-loader-spinner";
 
+import dummy from "./starter.json"
+
 export default function UploadTest({
   setCollage,
   showLoading,
@@ -37,10 +39,11 @@ export default function UploadTest({
     const recentResponse = await fetch("api/collage/mostRecent", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
     });
     const mostRecentCollage = await recentResponse.json();
+    // const mostRecentCollage = dummy
 
     const newValues = JSON.parse(mostRecentCollage.values).map(
       (v: number) => v - 200
@@ -136,6 +139,8 @@ export default function UploadTest({
           let uploadResult = await s3Upload.promise();
 
           let { Location } = uploadResult;
+
+          // let Location = 'foobar';
 
           const valueJson = JSON.stringify(newValues);
           await fetch("api/collage", {
